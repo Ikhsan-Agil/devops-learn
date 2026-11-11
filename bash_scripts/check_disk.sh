@@ -1,5 +1,7 @@
 #!/bin/bash
 disk="$(df -h | grep -i "/dev/root" | awk '{print $5}')"
+
+# Remove % symbol
 disk_cleaned="${disk%\%}"
 
 echo "Root Disk Usage: ${disk}"
