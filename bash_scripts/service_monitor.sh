@@ -9,6 +9,7 @@ while true; do
 
 	if systemctl is-active --quiet $TARGET_SERVICE; then
 		echo "[${TIMESTAMP}] The $TARGET_SERVICE Service is Healthy" >> $LOG_FILE_PATH
+		i=0
 	else
 		echo "[${TIMESTAMP}] WARNING: $TARGET_SERVICE is down! Attempting restart..." >> $LOG_FILE_PATH
 		sudo systemctl restart "$TARGET_SERVICE"
