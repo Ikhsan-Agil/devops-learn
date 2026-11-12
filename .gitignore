@@ -1,3 +1,4 @@
 .env
 secrets/
 bash_scripts/logs/
+docker/compose-lab/.env
