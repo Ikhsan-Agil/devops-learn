@@ -30,9 +30,10 @@ pipeline {
 
     stage('Run Tests') {
       steps {
-        withCredentials([string(credentialsId: 'db-password', variable: 'DB_PASSWORD')
-        echo 'Running backend unit test...'
-        sh 'DB_PASSWORD=${DB_PASSWORD} docker compose -f ${COMPOSE_PATH} run --rm backend pytest'
+        withCredentials([string(credentialsId: 'db-password', variable: 'DB_PASSWORD')]){
+          echo 'Running backend unit test...'
+          sh 'DB_PASSWORD=${DB_PASSWORD} docker compose -f ${COMPOSE_PATH} run --rm backend pytest'
+        }
       }
     }
 
