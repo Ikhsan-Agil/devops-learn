@@ -3,7 +3,7 @@ pipeline {
 
   environment {
     COMPOSE_PROJECT_NAME = 'devops-learn-ci'
-    COMPOSE_PATH= '/home/ubuntu/devops-learn/docker/compose-lab/docker-compose.yml'
+    COMPOSE_PATH= 'docker/compose-lab/docker-compose.yml'
   }
 
   stages {
