@@ -27,9 +27,36 @@ pipeline {
         sh 'docker compose -f ${COMPOSE_PATH} build'
       }
     }
+
+    stage('Run Tests') {
+      steps {
+        echo 'Running backend unit test...'
+        sh 'docker compose -f ${COMPOSE_PATH} run --rm backend pytest'
+      }
+    }
+
+    stage('Push Images') {
+      steps {
+        withCredentials([string(credentialsId: 'dockerhub_token', variable: 'DOCKER_PASSWORD')]) {
+          sh "docker login -u 'ikhsankusuma97' -p '${DOCKER_PASSWORD}'"
+          sh "docker compose -f ${COMPOSE_PATH} push"
+        }
+      }
+    }
+
+    stage('Deploy Stage') {
+      steps {
+        echo "Deploying 3-tier application stack..."
+        sh "docker compose -f ${COMPOSE_PATH} up -d --build"
+      }
+    }
   }
 
   post {
+    always {
+      echo 'cleaning up dangling Docker build cache...'
+      sh 'docker system prune -f --volumes'
+    }
     success {
       echo 'Pipeline completed successfully!'
     }
