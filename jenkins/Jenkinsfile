@@ -32,7 +32,7 @@ pipeline {
       steps {
         withCredentials([string(credentialsId: 'db-password', variable: 'DB_PASSWORD')]){
           echo 'Running backend unit test...'
-          sh 'DB_USER=DB_PASSWORD=${DB_PASSWORD} docker compose -f ${COMPOSE_PATH} run --rm backend python -m pytest'
+          sh 'DB_USER=myuser DB_NAME=my-postgres-db DB_PASSWORD=${DB_PASSWORD} docker compose -f ${COMPOSE_PATH} run --rm backend python -m pytest'
         }
       }
     }
@@ -48,8 +48,10 @@ pipeline {
 
     stage('Deploy Stage') {
       steps {
-        echo "Deploying 3-tier application stack..."
-        sh "docker compose -f ${COMPOSE_PATH} up -d --build"
+        withCredentials([string(credentialsId: 'db-password', variable: 'DB_PASSWORD')]){
+          echo "Deploying 3-tier application stack..."
+          sh "DB_USER=myuser DB_NAME=my-postgres-db DB_PASSWORD=${DB_PASSWORD} docker compose -f ${COMPOSE_PATH} up -d --build"
+        }
       }
     }
   }
