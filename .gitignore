@@ -2,3 +2,4 @@
 secrets/
 bash_scripts/logs/
 docker/compose-lab/.env
+docker/compose-lab/db-backups/*
