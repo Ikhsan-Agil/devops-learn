@@ -24,7 +24,7 @@ pipeline {
       steps {
         echo 'Building 3-tier application images...'
         // Builds your nginx, backend, and database containers.
-        sh 'docker compose -f ${COMPOSE_PATH} build'
+        sh 'DB_USER=myuser DB_NAME=my-postgres-db DB_PASSWORD=${DB_PASSWORD} docker compose -f ${COMPOSE_PATH} build'
       }
     }
 
