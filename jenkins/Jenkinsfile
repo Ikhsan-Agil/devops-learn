@@ -1,5 +1,3 @@
-def COMPOSE_PATH=/home/ubuntu/devops-learn/docker/compose-lab/docker-compose.yml
-
 pipeline {
   agent any
 
