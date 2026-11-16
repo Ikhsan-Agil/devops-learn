@@ -1,8 +1,11 @@
+def COMPOSE_PATH=/home/ubuntu/devops-learn/docker/compose-lab/docker-compose.yml
+
 pipeline {
   agent any
 
   environment {
     COMPOSE_PROJECT_NAME = 'devops-learn-ci'
+    COMPOSE_PATH= '/home/ubuntu/devops-learn/docker/compose-lab/docker-compose.yml'
   }
 
   stages {
@@ -15,7 +18,7 @@ pipeline {
     stage('Lint / Validate') {
       steps {
         echo 'Validating Docker Compose configuration...'
-        sh 'docker compose -f compose-lab/docker-compose.yml config'
+        sh 'docker compose -f ${COMPOSE_PATH} config'
       }
     }
 
@@ -23,7 +26,7 @@ pipeline {
       steps {
         echo 'Building 3-tier application images...'
         // Builds your nginx, backend, and database containers.
-        sh 'docker compose -f compose-lab/docker-compose.yml build'
+        sh 'docker compose -f ${COMPOSE_PATH} build'
       }
     }
   }
