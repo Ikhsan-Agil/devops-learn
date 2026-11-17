@@ -39,7 +39,7 @@ pipeline {
 
     stage('Push Images') {
       steps {
-        withCredentials([string(credentialsId: 'dockerhub_token', variable: 'DOCKER_PASSWORD')]) {
+        withCredentials([string(credentialsId: 'dockerhub-token', variable: 'DOCKER_PASSWORD')]) {
           sh "docker login -u 'ikhsankusuma97' -p '${DOCKER_PASSWORD}'"
           sh "docker compose -f ${COMPOSE_PATH} push"
         }
