@@ -2,7 +2,7 @@ pipeline {
   agent any
 
   environment {
-    COMPOSE_PROJECT_NAME = 'devops-learn-ci'
+    COMPOSE_PROJECT_NAME = 'devops-learn-jenkins'
     COMPOSE_PATH= 'docker/compose-lab/docker-compose.yml'
   }
 
