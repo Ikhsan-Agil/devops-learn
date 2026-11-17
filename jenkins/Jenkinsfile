@@ -26,7 +26,7 @@ pipeline {
         // Builds your nginx, backend, and database containers.
         sh '''
           cd docker/compose-lab
-          DB_USER=myuser DB_NAME=my-postgres-db DB_PASSWORD=${DB_PASSWORD} docker compose -f ${COMPOSE_PATH} build
+          DB_USER=myuser DB_NAME=my-postgres-db DB_PASSWORD=${DB_PASSWORD} docker compose -f docker-compose.yml build
         '''
       }
     }
@@ -37,7 +37,7 @@ pipeline {
           echo 'Running backend unit test...'
           sh '''
             cd docker/compose-lab
-            DB_USER=myuser DB_NAME=my-postgres-db DB_PASSWORD=${DB_PASSWORD} docker compose -f ${COMPOSE_PATH} run --rm backend python -m pytest
+            DB_USER=myuser DB_NAME=my-postgres-db DB_PASSWORD=${DB_PASSWORD} docker compose -f docker-compose.yml run --rm backend python -m pytest
           '''
         }
       }
@@ -58,7 +58,7 @@ pipeline {
           echo "Deploying 3-tier application stack..."
           sh '''
             cd docker/compose-lab
-            DB_USER=myuser DB_NAME=my-postgres-db DB_PASSWORD=${DB_PASSWORD} docker compose -f ${COMPOSE_PATH} up -d --build
+            DB_USER=myuser DB_NAME=my-postgres-db DB_PASSWORD=${DB_PASSWORD} docker compose -f docker-compose.yaml up -d --build
           '''
         }
       }
