@@ -1,6 +1,8 @@
 services:
   web:
-    image: nginx:alpine
+    build:
+      context: .
+      dockerfile: ./nginx/Dockerfile
     container_name: compose-nginx
     ports:
       - "8080:80"
