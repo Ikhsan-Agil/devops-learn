@@ -58,6 +58,7 @@ pipeline {
           echo "Deploying 3-tier application stack..."
           sh '''
             cd docker/compose-lab
+            docker compose -f docker-compose.yml down
             DB_USER=myuser DB_NAME=my-postgres-db DB_PASSWORD=${DB_PASSWORD} docker compose -f docker-compose.yml up -d --build
           '''
         }

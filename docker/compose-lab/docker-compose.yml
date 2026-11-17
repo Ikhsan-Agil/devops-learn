@@ -3,6 +3,7 @@ services:
     build:
       context: .
       dockerfile: nginx/Dockerfile
+    image: compose-nginx:latest
     container_name: compose-nginx
     ports:
       - "80:80"
@@ -18,6 +19,7 @@ services:
           memory: 64M
   backend:
     build: ./backend
+    image: compose-backend:latest
     container_name: compose-backend
     ports:
       - "5000:5000"
