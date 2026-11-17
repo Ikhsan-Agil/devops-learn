@@ -37,6 +37,7 @@ pipeline {
           echo 'Running backend unit test...'
           sh '''
             cd docker/compose-lab
+            docker compose -f docker-compose.yml down
             DB_USER=myuser DB_NAME=my-postgres-db DB_PASSWORD=${DB_PASSWORD} docker compose -f docker-compose.yml run --rm backend python -m pytest
           '''
         }
