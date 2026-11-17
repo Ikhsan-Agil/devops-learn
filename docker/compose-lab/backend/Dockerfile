@@ -28,6 +28,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # Copy installed python packages from the builder stage
 COPY --from=builder /root/.local /root/.local
 COPY app.py .
+COPY test_app.py .
 
 # Make sure local python binaries/scripts are accessible in PATH
 ENV PATH=/root/.local/bin:$PATH
