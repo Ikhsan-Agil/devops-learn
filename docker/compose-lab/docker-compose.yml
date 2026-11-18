@@ -4,7 +4,7 @@ services:
       context: .
       dockerfile: nginx/Dockerfile
     image: ikhsankusuma97/devops-learn-jenkins-web:latest
-    container_name: compose-nginx
+    container_name: learn-compose-nginx
     ports:
       - "80:80"
     depends_on:
@@ -20,7 +20,7 @@ services:
   backend:
     build: ./backend
     image: ikhsankusuma97/devops-learn-jenkins-backend:latest
-    container_name: compose-backend
+    container_name: learn-compose-backend
     ports:
       - "5000:5000"
     environment:
@@ -43,7 +43,7 @@ services:
     image: postgres:15-alpine
     networks:
       - internal-db-net
-    container_name: compose-postgres
+    container_name: learn-compose-postgres
     environment:
       - POSTGRES_USER=${DB_USER}
       - POSTGRES_PASSWORD=${DB_PASSWORD}
