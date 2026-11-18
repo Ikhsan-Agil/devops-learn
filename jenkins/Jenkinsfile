@@ -60,7 +60,7 @@ pipeline {
           sh '''
             cd docker/compose-lab
             docker compose -f docker-compose.yml down --remove-orphans
-            DB_USER=myuser DB_NAME=my-postgres-db DB_PASSWORD=${DB_PASSWORD} docker compose -f docker-compose.yml up -d --build
+            DB_USER=myuser DB_NAME=my-postgres-db DB_PASSWORD=${DB_PASSWORD} docker compose -f docker-compose.yml up -d
           '''
         }
       }
